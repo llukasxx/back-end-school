@@ -11,16 +11,61 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160426102746) do
+ActiveRecord::Schema.define(version: 20160426141348) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "group_lessons", force: :cascade do |t|
+    t.integer  "group_id"
+    t.integer  "lesson_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "group_lessons", ["group_id"], name: "index_group_lessons_on_group_id", using: :btree
+  add_index "group_lessons", ["lesson_id"], name: "index_group_lessons_on_lesson_id", using: :btree
+
+  create_table "group_students", force: :cascade do |t|
+    t.integer  "student_id"
+    t.integer  "group_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "group_students", ["group_id"], name: "index_group_students_on_group_id", using: :btree
+  add_index "group_students", ["student_id"], name: "index_group_students_on_student_id", using: :btree
 
   create_table "groups", force: :cascade do |t|
     t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
+
+  create_table "lesson_dates", force: :cascade do |t|
+    t.datetime "date"
+    t.integer  "lesson_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "lesson_dates", ["lesson_id"], name: "index_lesson_dates_on_lesson_id", using: :btree
+
+  create_table "lessons", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "teacher_lessons", force: :cascade do |t|
+    t.integer  "teacher_id"
+    t.integer  "lesson_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "teacher_lessons", ["lesson_id"], name: "index_teacher_lessons_on_lesson_id", using: :btree
+  add_index "teacher_lessons", ["teacher_id"], name: "index_teacher_lessons_on_teacher_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -35,6 +80,9 @@ ActiveRecord::Schema.define(version: 20160426102746) do
     t.inet     "last_sign_in_ip"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "account_type"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree

@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :lessons
   resources :groups
   devise_for :users
   namespace :api,defaults: {format: :json} do

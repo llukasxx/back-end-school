@@ -1,2 +1,2 @@
-class GroupsController < ApplicationController
+class Api::V1::GroupsController < ApplicationController
 end
