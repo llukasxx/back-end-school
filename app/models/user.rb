@@ -27,4 +27,8 @@ class User < ActiveRecord::Base
   def name
     "#{first_name} #{last_name}"
   end
+
+  def admin?
+    account_type == 'admin'
+  end
 end
