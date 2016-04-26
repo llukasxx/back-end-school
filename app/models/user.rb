@@ -22,6 +22,8 @@ class User < ActiveRecord::Base
   has_many :student_groups, through: :group_students, source: :group
   has_many :student_lessons, through: :student_groups, source: :lessons
 
+  acts_as_messageable
+
   def name
     "#{first_name} #{last_name}"
   end

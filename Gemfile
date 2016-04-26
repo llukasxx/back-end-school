@@ -28,6 +28,7 @@ gem 'devise', '3.4.1'
 gem 'rack-cors','0.4.0', require: 'rack/cors'
 # json web token gem  to decode, verify and generate JWT
 gem 'jwt','1.5.1'
+gem 'mailboxer'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
