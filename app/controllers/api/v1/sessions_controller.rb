@@ -8,7 +8,7 @@ class Api::V1::SessionsController < Devise::SessionsController
     if user && user.valid_password?(params[:user][:password])
       auth_token = jwt_token(user)
       respond_with do |format|
-        format.json { render json: {auth_token: auth_token} }
+        format.json { render json: {auth_token: auth_token, user: user.name} }
       end
     else
       invalid_login_attempt
@@ -18,7 +18,7 @@ class Api::V1::SessionsController < Devise::SessionsController
   private
   
     def invalid_login_attempt
-      render json: {error: t('devise.failure.not_found_in_database')}, status: :unauthorized
+      render json: {error: 'Invalid email or password.'}, status: :unauthorized
     end
  
 end
