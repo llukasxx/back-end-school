@@ -1,6 +1,8 @@
 require 'database_cleaner'
 require 'factory_girl_rails'
 
+require 'support/request_helpers'
+
 RSpec.configure do |config|
 
   # Factory girl
@@ -45,5 +47,8 @@ RSpec.configure do |config|
   config.after(:each) do
     DatabaseCleaner.clean
   end
+
+  ## My own helpers
+  config.include Requests::UserHelpers, type: :request
 end
 
