@@ -30,6 +30,8 @@ gem 'rack-cors','0.4.0', require: 'rack/cors'
 gem 'jwt','1.5.1'
 gem 'mailboxer'
 gem 'rails_admin'
+gem 'active_model_serializers'
+gem 'ffaker'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 

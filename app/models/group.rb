@@ -2,7 +2,7 @@ class Group < ActiveRecord::Base
   # Validations
   validates :name, presence: true, 
                    uniqueness: true, 
-                   length: {is: 4}
+                   length: {is: 5}
 
   ## Associations
   ## students associations
