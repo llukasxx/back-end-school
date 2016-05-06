@@ -17,11 +17,13 @@ RSpec.describe User, type: :model do
   it { should have_many(:groups_teacher) }
   it { should have_many(:teacher_lessons) }
   it { should have_many(:lessons) }
+  it { should have_many(:teacher_grades) }
 
   # as student
   it { should have_many(:student_groups) }
   it { should have_many(:group_students) }
   it { should have_many(:student_lessons) }
+  it { should have_many(:student_grades) }
   
   
 end

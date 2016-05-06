@@ -21,7 +21,9 @@ class User < ActiveRecord::Base
   has_many :group_students, foreign_key: :student_id
   has_many :student_groups, through: :group_students, source: :group
   has_many :student_lessons, through: :student_groups, source: :lessons
-
+  #Student/Teacher-grades
+  has_many :student_grades, class_name: 'Grade', foreign_key: 'student_id'
+  has_many :teacher_grades, class_name: 'Grade', foreign_key: 'teacher_id'
   acts_as_messageable
 
   def name
