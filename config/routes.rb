@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  resources :grades
   root 'home#index'
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   devise_for :users
@@ -12,6 +11,9 @@ Rails.application.routes.draw do
       scope '/groups' do
         get '/teacher_groups', to: 'groups#teacher_groups'
         get '/teacher_group', to: 'groups#teacher_group'
+      end
+      scope '/students' do
+        resources :grades, only: [:show, :create, :update]
       end
     end
   end

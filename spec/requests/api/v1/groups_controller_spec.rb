@@ -41,7 +41,6 @@ describe "Groups API" do
     it "returns proper group" do
       get @url, {id: @group.id}, {"Authorization": @token}
       json = JSON.parse(response.body)
-      puts json
       expect(json["group"]["name"]).to eq @group.name
     end
   end
