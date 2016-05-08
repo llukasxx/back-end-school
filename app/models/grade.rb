@@ -7,4 +7,5 @@ class Grade < ActiveRecord::Base
   validates :teacher_id, presence: true
   validates :lesson_id, presence: true
   validates :grade, presence: true
+  validates :description, presence: true
 end

@@ -25,7 +25,7 @@ describe "Grades API" do
     before(:each) do
       @user = create(:user, account_type: 'teacher')
       @token = get_token_for_user(@user)
-      @grade = {grade: {student_id: 1, lesson_id: 1, teacher_id: @user.id, grade: 5}}
+      @grade = {grade: {student_id: 1, lesson_id: 1, teacher_id: @user.id, grade: 5, description: 'test'}}
       @url = "/api/v1/students/grades"
     end
 
