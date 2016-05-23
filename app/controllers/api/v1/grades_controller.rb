@@ -7,18 +7,34 @@ class Api::V1::GradesController < ApplicationController
   end
 
   def create
-    grade = Grade.new(grade_params)
-    if grade.save!
-      render json: grade, status: 201
-    else
-      render json: grade.errors, status: 400
+    if !params[:grade].empty?
+      grade = @current_user.teacher_grades.new(grade_params)
+      if grade.save!
+        student = grade.student
+        ## must be student bcz of front-end problems
+        render json: student, root: "student", status: 201
+      else
+        render json: grade.errors, status: 400
+      end
+    elsif !params[:grades].empty?
+      students_ids = []
+      Grade.transaction do
+        params[:grades].each do |g|
+          new_grade = g.require(:grade).permit(:lesson_id, :student_id, :grade, :description)
+          @current_user.teacher_grades.new(new_grade).save!
+          students_ids.push(g[:grade][:student_id])
+        end
+      end
+      students = User.where(id: students_ids)
+      render json: students, root: "students", status: 201
     end
   end
 
   def update
     grade = Grade.find(params[:id])
     if grade.update_attributes(grade_params)
-      render json: grade, status: 201
+      student = grade.student
+      render json: student, root: "student", status: 201
     else
       render json: grade.errors, status: 400
     end
@@ -27,7 +43,7 @@ class Api::V1::GradesController < ApplicationController
   private
 
     def grade_params
-      params.require(:grade).permit(:lesson_id, :teacher_id, :student_id, :grade, :description)
+      params.require(:grade).permit(:lesson_id, :student_id, :grade, :description)
     end
 
 end

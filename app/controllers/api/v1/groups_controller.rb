@@ -2,7 +2,7 @@ class Api::V1::GroupsController < ApplicationController
   before_action :authenticate_user_from_token!
 
   def teacher_groups
-    render json: @current_user.groups_teacher
+    render json: @current_user.groups_teacher.uniq
   end
 
   def teacher_group
