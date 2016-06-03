@@ -15,6 +15,11 @@ Rails.application.routes.draw do
       scope '/students' do
         resources :grades, only: [:show, :create, :update]
       end
+      scope '/conversations' do
+        get '/get_conversations', to: 'conversations#get_conversations'
+        post '/reply/:id', to: 'conversations#reply_to_conversation'
+        post '/reply', to: 'conversations#new_conversation'
+      end
     end
   end
 end
