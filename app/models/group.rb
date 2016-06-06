@@ -13,4 +13,7 @@ class Group < ActiveRecord::Base
   has_many :lessons, through: :group_lessons
   ## teachers associations
   has_many :teachers, through: :lessons
+
+  self.per_page = 10
+
 end

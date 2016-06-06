@@ -9,4 +9,7 @@ class Lesson < ActiveRecord::Base
   has_many :teachers, through: :teacher_lessons
   has_many :students, through: :groups
   has_many :lesson_dates
+
+  self.per_page = 10
+  
 end

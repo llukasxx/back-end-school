@@ -10,4 +10,11 @@ class Api::V1::GroupsController < ApplicationController
     render json: group
   end
 
+  def get_groups
+    groups = Group.all.includes(:lessons).paginate(page: params[:page])
+    count = Group.all.count
+    groups = groups.map {|g| ReceiverGroupSerializer.new(g).as_json(root: false) }
+    render json: { groups: groups, count: count }
+  end
+
 end
