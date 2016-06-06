@@ -14,6 +14,7 @@ Rails.application.routes.draw do
       end
       scope '/students' do
         resources :grades, only: [:show, :create, :update]
+        get '/get_students', to: 'students#get_students'
       end
       scope '/conversations' do
         get '/get_conversations', to: 'conversations#get_conversations'
