@@ -33,4 +33,6 @@ class User < ActiveRecord::Base
   def admin?
     account_type == 'admin'
   end
+
+  self.per_page = 10
 end
