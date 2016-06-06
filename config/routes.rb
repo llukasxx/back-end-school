@@ -16,6 +16,9 @@ Rails.application.routes.draw do
         resources :grades, only: [:show, :create, :update]
         get '/get_students', to: 'students#get_students'
       end
+      scope '/teachers' do
+        get '/get_teachers', to: 'teachers#get_teachers'
+      end
       scope '/conversations' do
         get '/get_conversations', to: 'conversations#get_conversations'
         post '/reply/:id', to: 'conversations#reply_to_conversation'
