@@ -2,7 +2,7 @@ class Api::V1::TeachersController < ApplicationController
   before_action :authenticate_user_from_token!
   
   def get_teachers
-    teachers = User.where(account_type: 'teacher').includes(:teacher_lessons).paginate(page: params[:page])
+    teachers = User.where(account_type: 'teacher').includes(:lessons).paginate(page: params[:page])
     count = User.where(account_type: 'teacher').count
     teachers = teachers.map {|s| TeacherSerializer.new(s).as_json(root: false) }
     render json: { teachers: teachers, count: count }
