@@ -10,6 +10,12 @@ class Lesson < ActiveRecord::Base
   has_many :students, through: :groups
   has_many :lesson_dates
 
+  #search
+  include PgSearch
+  pg_search_scope :search_by_name, 
+                  against: :name,
+                  using: { tsearch: { prefix: true } }
+                  
   self.per_page = 10
-  
+
 end

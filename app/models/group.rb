@@ -15,5 +15,10 @@ class Group < ActiveRecord::Base
   has_many :teachers, through: :lessons
 
   self.per_page = 10
+  #search
+  include PgSearch
+  pg_search_scope :search_by_name, 
+                  against: [:name],
+                  using: { tsearch: { prefix: true } }
 
 end

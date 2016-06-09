@@ -24,7 +24,15 @@ class User < ActiveRecord::Base
   #Student/Teacher-grades
   has_many :student_grades, class_name: 'Grade', foreign_key: 'student_id'
   has_many :teacher_grades, class_name: 'Grade', foreign_key: 'teacher_id'
+  
+  #messages
   acts_as_messageable
+
+  #search
+  include PgSearch
+  pg_search_scope :search_by_full_name, 
+                  against: [:first_name, :last_name],
+                  using: { tsearch: { prefix: true } }
 
   def name
     "#{first_name} #{last_name}"
