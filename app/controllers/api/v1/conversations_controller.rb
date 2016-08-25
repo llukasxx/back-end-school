@@ -25,8 +25,10 @@ class Api::V1::ConversationsController < ApplicationController
   def new_broadcast_conversation
     if !conversation_params[:receivers].empty?
       all_receivers = []
+      
       body = conversation_params[:body]
       subject = conversation_params[:subject]
+
       conversation_params[:receivers][:groups].map do 
         |g| all_receivers.push(Group.find(g).students)
       end if !conversation_params[:receivers][:groups].nil?
