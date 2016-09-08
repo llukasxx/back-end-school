@@ -24,6 +24,9 @@ class User < ActiveRecord::Base
   #Student/Teacher-grades
   has_many :student_grades, class_name: 'Grade', foreign_key: 'student_id'
   has_many :teacher_grades, class_name: 'Grade', foreign_key: 'teacher_id'
+
+  #User has many events
+  has_many :events
   
   #messages
   acts_as_messageable

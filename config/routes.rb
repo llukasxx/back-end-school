@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'events/index'
+
   root 'home#index'
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   devise_for :users
@@ -28,6 +30,9 @@ Rails.application.routes.draw do
       end
       scope '/lessons' do
         get '/get_lessons', to: 'lessons#get_lessons'
+      end
+      scope '/events' do
+        get '/get_events', to: 'events#get_events'
       end
     end
   end
