@@ -1,5 +1,5 @@
 class Event < ActiveRecord::Base
-  scope :upcoming, -> { where('date >= ?', Time.now) }
+  scope :upcoming, -> { where('date >= ?', Time.now).reorder(date: :asc) }
   scope :past, -> { where('date < ?', Time.now) }
   belongs_to :creator, class_name: "User", foreign_key: "user_id"
 
