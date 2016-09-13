@@ -33,6 +33,8 @@ Rails.application.routes.draw do
       end
       scope '/events' do
         get '/get_events', to: 'events#get_upcoming_events'
+        get '/get_connected_events', to: 'events#get_upcoming_connected_events'
+        get '/get_created_events', to: 'events#get_upcoming_created_events'
         get '/get_past_events', to: 'events#get_past_events'
       end
     end
