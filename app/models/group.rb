@@ -13,7 +13,9 @@ class Group < ActiveRecord::Base
   has_many :lessons, through: :group_lessons
   ## teachers associations
   has_many :teachers, through: :lessons
-
+  # events association
+  has_many :events, through: :group_events
+  has_many :group_events
   self.per_page = 10
   #search
   include PgSearch
