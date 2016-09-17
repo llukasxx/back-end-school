@@ -14,6 +14,7 @@ Rails.application.routes.draw do
         get '/teacher_groups', to: 'groups#teacher_groups'
         get '/teacher_group', to: 'groups#teacher_group'
         get '/get_groups', to: 'groups#get_groups'
+        get '/get_all_groups', to: 'groups#get_all_groups'
       end
       scope '/students' do
         resources :grades, only: [:show, :create, :update]

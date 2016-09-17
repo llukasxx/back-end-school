@@ -24,4 +24,9 @@ class Api::V1::GroupsController < ApplicationController
     end
   end
 
+  def get_all_groups
+    groups = Group.all
+    render json: groups, each_serializer: SimpleGroupSerializer
+  end
+
 end
