@@ -37,6 +37,7 @@ Rails.application.routes.draw do
         get '/get_connected_events', to: 'events#get_upcoming_connected_events'
         get '/get_created_events', to: 'events#get_upcoming_created_events'
         get '/get_past_events', to: 'events#get_past_events'
+        post '/new_event', to: 'events#create'
       end
     end
   end

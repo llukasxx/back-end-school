@@ -1,6 +1,15 @@
 class Api::V1::EventsController < ApplicationController
   before_action :authenticate_user_from_token!
 
+  def create
+    event = @current_user.events.new(event_params)
+    if event.save!
+      render json: event
+    else
+      render json: event.errors, status: 400
+    end
+  end
+
   def get_upcoming_events
     events = Event.upcoming.page(params[:page])
     events = events.map {|e| EventSerializer.new(e).as_json(root: false) }
@@ -25,5 +34,11 @@ class Api::V1::EventsController < ApplicationController
     events = Event.past.page(params[:page])
     render json: events
   end
+
+  private
+
+    def event_params
+      params.require(:event).permit(:name, :date, :group_ids => [])
+    end
 
 end
