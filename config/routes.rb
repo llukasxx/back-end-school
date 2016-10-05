@@ -33,10 +33,12 @@ Rails.application.routes.draw do
         get '/get_lessons', to: 'lessons#get_lessons'
       end
       scope '/events' do
-        get '/get_events', to: 'events#get_upcoming_events'
-        get '/get_connected_events', to: 'events#get_upcoming_connected_events'
-        get '/get_created_events', to: 'events#get_upcoming_created_events'
+        get '/get_upcoming_events', to: 'events#get_upcoming_events'
+        get '/get_upcoming_connected_events', to: 'events#get_upcoming_connected_events'
+        get '/get_upcoming_created_events', to: 'events#get_upcoming_created_events'
         get '/get_past_events', to: 'events#get_past_events'
+        get '/get_past_connected_events', to: 'events#get_past_connected_events'
+        get '/get_past_created_events', to: 'events#get_past_created_events'
         post '/new_event', to: 'events#create'
       end
     end

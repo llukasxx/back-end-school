@@ -32,7 +32,21 @@ class Api::V1::EventsController < ApplicationController
 
   def get_past_events
     events = Event.past.page(params[:page])
-    render json: events
+    events = events.map {|e| EventSerializer.new(e).as_json(root: false) }
+    render json: { events: events, count: Event.past.count }
+  end
+
+  def get_past_connected_events
+    teachers_groups_ids = @current_user.groups_teacher.pluck(:id).uniq
+    connected_events = Event.past.page(params[:page]).joins(:groups).where('groups.id': teachers_groups_ids).uniq
+    events = connected_events.map {|e| EventSerializer.new(e).as_json(root: false) }
+    render json: { events: events, count: connected_events.count }
+  end
+
+  def get_past_created_events
+    teacher_events = @current_user.events.past.page(params[:page])
+    events = teacher_events.map {|e| EventSerializer.new(e).as_json(root: false) }
+    render json: { events: events, count: teacher_events.count }
   end
 
   private
