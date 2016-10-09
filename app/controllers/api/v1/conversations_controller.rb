@@ -40,8 +40,7 @@ class Api::V1::ConversationsController < ApplicationController
       conversation_params[:receivers][:users].map do 
         |u| all_receivers.push(User.find(u)) 
       end if !conversation_params[:receivers][:users].nil?
-
-      receipt = @current_user.send_message(all_receivers.flatten!.uniq, body, subject)
+      receipt = @current_user.send_message(all_receivers.flatten.uniq, body, subject)
 
       render json: receipt.conversation, status: 201
     else 

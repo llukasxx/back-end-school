@@ -31,6 +31,7 @@ Rails.application.routes.draw do
       end
       scope '/lessons' do
         get '/get_lessons', to: 'lessons#get_lessons'
+        get '/get_student_lessons', to: 'lessons#get_student_lessons'
       end
       scope '/events' do
         get '/get_upcoming_events', to: 'events#get_upcoming_events'
