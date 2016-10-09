@@ -1,5 +1,6 @@
 class SimpleStudentLessonSerializer < ActiveModel::Serializer
-  attributes :id, :name, :student_grades
+  attributes :id, :name 
+  has_many :student_grades, serializer: GradeSerializer
 
   def student_grades
     # scope here is 'current_user'
