@@ -1,5 +1,6 @@
 class SimpleStudentLessonSerializer < ActiveModel::Serializer
   attributes :id, :name 
+  has_many :lesson_dates, serializer: LessonDatesSerializer
   has_many :student_grades, serializer: GradeSerializer
 
   def student_grades
