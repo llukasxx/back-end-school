@@ -9,6 +9,12 @@ class User < ActiveRecord::Base
             length: {in: 2..30}
   validates :account_type, presence: true, 
             format: {with: /admin|teacher|student/}
+
+  # teacher-scopes
+  scope :teachers, -> { User.where(account_type: 'teacher') }
+  scope :teachers_with_lessons, -> { User.where(account_type: 'teacher').includes(:lessons) }
+  #student-scopes
+  scope :students, -> { User.where(account_type: 'student') }
   # Associations
 
   ## Teachers to group association

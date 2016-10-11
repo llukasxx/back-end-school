@@ -16,12 +16,10 @@ Rails.application.routes.draw do
         get '/get_groups', to: 'groups#get_groups'
         get '/get_all_groups', to: 'groups#get_all_groups'
       end
+      resources :teachers, only: [:index]
       scope '/students' do
         resources :grades, only: [:show, :create, :update]
         get '/get_students', to: 'students#get_students'
-      end
-      scope '/teachers' do
-        get '/get_teachers', to: 'teachers#get_teachers'
       end
       scope '/conversations' do
         get '/get_conversations', to: 'conversations#get_conversations'
