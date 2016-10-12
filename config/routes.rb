@@ -10,14 +10,10 @@ Rails.application.routes.draw do
         match '/sessions' => 'sessions#create', via: :post
         match '/sessions' => 'sessions#destroy', via: :delete
       end
-      scope '/groups' do
-        get '/teacher_groups', to: 'groups#teacher_groups'
-        get '/teacher_group', to: 'groups#teacher_group'
-        get '/get_groups', to: 'groups#get_groups'
-        get '/get_all_groups', to: 'groups#get_all_groups'
-      end
+      resources :groups, only: [:index]
       resources :teachers, only: [:index] do
         resources :grades, except: [:destroy]
+        resources :groups, only: [:index]
       end
       resources :students, only: [:index] do
         resources :grades, only: [:index]

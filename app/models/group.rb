@@ -3,7 +3,7 @@ class Group < ActiveRecord::Base
   validates :name, presence: true, 
                    uniqueness: true, 
                    length: {is: 5}
-
+  scope :with_lessons, -> { Group.all.includes(:lessons) }
   ## Associations
   ## students associations
   has_many :group_students

@@ -21,7 +21,7 @@ class Api::V1::LessonsController < ApplicationController
   private
 
     def lesson_params
-      params.permit(:query, :page, :serializer, :student_id)
+      params.permit(:query, :page, :student_id)
     end
 
 end

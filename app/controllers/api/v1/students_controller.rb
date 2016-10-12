@@ -9,7 +9,7 @@ class Api::V1::StudentsController < ApplicationController
       students = User.students_with_groups.page(student_params[:page])
       student_count = User.students.count
     end
-    render json: students, each_serializer: StudentSerializer, meta: { count: student_count }
+    render json: students, each_serializer: StudentSerializer, meta: { count: student_count }, status: :ok
   end
 
   private
