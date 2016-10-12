@@ -1,6 +1,10 @@
 class Api::V1::GradesController < ApplicationController
   before_action :authenticate_user_from_token!
 
+  def index
+    
+  end
+
   def show
     grade = Grade.find(params[:id])
     render json: grade    

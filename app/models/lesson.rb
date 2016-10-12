@@ -9,7 +9,8 @@ class Lesson < ActiveRecord::Base
   has_many :teachers, through: :teacher_lessons
   has_many :students, through: :groups
   has_many :lesson_dates
-
+  #scopes
+  scope :with_groups, -> { Lesson.all.includes(:groups) }
   #search
   include PgSearch
   pg_search_scope :search_by_name, 
