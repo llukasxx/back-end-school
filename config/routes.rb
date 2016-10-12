@@ -17,10 +17,8 @@ Rails.application.routes.draw do
         get '/get_all_groups', to: 'groups#get_all_groups'
       end
       resources :teachers, only: [:index]
-      scope '/students' do
-        resources :grades, only: [:show, :create, :update]
-        get '/get_students', to: 'students#get_students'
-      end
+      resources :students, only: [:index]
+      resources :grades, only: [:show, :create, :update]
       scope '/conversations' do
         get '/get_conversations', to: 'conversations#get_conversations'
         post '/reply/:id', to: 'conversations#reply_to_conversation'

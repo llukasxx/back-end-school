@@ -1,17 +1,14 @@
 class Api::V1::StudentsController < ApplicationController
   before_action :authenticate_user_from_token!
 
-  def get_students
+  def index
+    student_count = User.students.count
     if student_params[:query] && !student_params[:query].empty?
-      students = User.where(account_type: 'student').search_by_full_name(params[:query]).includes(:student_groups)
-      count = students.count
-      students = students.map {|s| StudentSerializer.new(s).as_json(root: false) }
-      render json: { students: students, count: count }
+      students = User.students_with_groups.search_by_full_name(student_params[:query]).page(student_params[:page])
+      render json: students, each_serializer: StudentSerializer, meta: { count: student_count }
     else
-      students = User.where(account_type: 'student').includes(:student_groups).paginate(page: params[:page])
-      count = User.where(account_type: 'student').count
-      students = students.map {|s| StudentSerializer.new(s).as_json(root: false) }
-      render json: { students: students, count: count }
+      students = User.students_with_groups.page(student_params[:page])
+      render json: students, each_serializer: StudentSerializer, meta: { count: student_count }
     end
   end
 

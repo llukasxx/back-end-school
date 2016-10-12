@@ -15,7 +15,7 @@ class User < ActiveRecord::Base
   scope :teachers_with_lessons, -> { User.teachers.includes(:lessons) }
   #student-scopes
   scope :students, -> { User.where(account_type: 'student') }
-  scope :students_with_groups, -> { User.students.includes(:student_groups))}
+  scope :students_with_groups, -> { User.students.includes(:student_groups) }
   # Associations
 
   ## Teachers to group association
