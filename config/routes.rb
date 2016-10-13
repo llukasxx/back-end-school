@@ -22,12 +22,7 @@ Rails.application.routes.draw do
       resources :grades, only: [:show, :create, :update]
       resources :lessons, only: [:index]
       resources :events, only: [:index, :create]
-      scope '/conversations' do
-        get '/get_conversations', to: 'conversations#get_conversations'
-        post '/reply/:id', to: 'conversations#reply_to_conversation'
-        post '/reply', to: 'conversations#new_conversation'
-        post '/new_broadcast_conversation', to: 'conversations#new_broadcast_conversation'
-      end
+      resources :conversations, only: [:index, :create, :update]
     end
   end
 end
