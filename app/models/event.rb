@@ -1,6 +1,6 @@
 class Event < ActiveRecord::Base
-  scope :upcoming, -> { where('date >= ?', Time.now).reorder(date: :asc) }
-  scope :past, -> { where('date < ?', Time.now) }
+  scope :upcoming, -> { where('date >= ?', Time.now).includes(:groups, :creator).reorder(date: :asc) }
+  scope :past, -> { where('date < ?', Time.now).includes(:groups, :creator) }
 
   scope :upcoming_connected, lambda { |user| 
     user_groups_ids = user.groups_teacher.pluck(:id).uniq
