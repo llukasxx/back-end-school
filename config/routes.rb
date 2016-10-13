@@ -21,20 +21,12 @@ Rails.application.routes.draw do
       end
       resources :grades, only: [:show, :create, :update]
       resources :lessons, only: [:index]
+      resources :events, only: [:index, :create]
       scope '/conversations' do
         get '/get_conversations', to: 'conversations#get_conversations'
         post '/reply/:id', to: 'conversations#reply_to_conversation'
         post '/reply', to: 'conversations#new_conversation'
         post '/new_broadcast_conversation', to: 'conversations#new_broadcast_conversation'
-      end
-      scope '/events' do
-        get '/get_upcoming_events', to: 'events#get_upcoming_events'
-        get '/get_upcoming_connected_events', to: 'events#get_upcoming_connected_events'
-        get '/get_upcoming_created_events', to: 'events#get_upcoming_created_events'
-        get '/get_past_events', to: 'events#get_past_events'
-        get '/get_past_connected_events', to: 'events#get_past_connected_events'
-        get '/get_past_created_events', to: 'events#get_past_created_events'
-        post '/new_event', to: 'events#create'
       end
     end
   end

@@ -11,11 +11,11 @@ class User < ActiveRecord::Base
             format: {with: /admin|teacher|student/}
 
   # teacher-scopes
-  scope :teachers, -> { User.where(account_type: 'teacher') }
-  scope :teachers_with_lessons, -> { User.teachers.includes(:lessons) }
+  scope :teachers, -> { where(account_type: 'teacher') }
+  scope :teachers_with_lessons, -> { teachers.includes(:lessons) }
   #student-scopes
-  scope :students, -> { User.where(account_type: 'student') }
-  scope :students_with_groups, -> { User.students.includes(:student_groups) }
+  scope :students, -> { where(account_type: 'student') }
+  scope :students_with_groups, -> { students.includes(:student_groups) }
   # Associations
 
   ## Teachers to group association
