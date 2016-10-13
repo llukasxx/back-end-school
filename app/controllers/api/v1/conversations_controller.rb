@@ -2,7 +2,7 @@ class Api::V1::ConversationsController < ApplicationController
   before_action :authenticate_user_from_token!
 
   def index
-    inbox = @current_user.mailbox.conversations.includes(messages: [:sender, receipts: [:receiver]])
+    inbox = @current_user.mailbox.conversations
     render json: inbox
   end
 

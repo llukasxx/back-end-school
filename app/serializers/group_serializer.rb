@@ -4,6 +4,6 @@ class GroupSerializer < ActiveModel::Serializer
 
   def lessons
     lesson_ids = scope.teacher_lessons.pluck(:lesson_id)
-    object.lessons.where('lessons.id IN (?)', lesson_ids)
+    object.lessons.includes(:lesson_dates).where('lessons.id IN (?)', lesson_ids)
   end
 end
