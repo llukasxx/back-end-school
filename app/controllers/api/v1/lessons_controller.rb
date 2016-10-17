@@ -8,7 +8,7 @@ class Api::V1::LessonsController < ApplicationController
       render json: lessons, each_serializer: ReceiverLessonSerializer, meta: { count: lessons_count }, status: :ok
     elsif lesson_params[:student_id]
       student = User.find(lesson_params[:student_id])
-      lessons = student.student_lessons
+      lessons = student.student_lessons.includes(:lesson_dates)
       render json: lessons, each_serializer: SimpleStudentLessonSerializer, scope: current_user, status: :ok
     else
       lessons = Lesson.with_groups.page(lesson_params[:page])

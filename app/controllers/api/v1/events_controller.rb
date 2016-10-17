@@ -2,31 +2,13 @@ class Api::V1::EventsController < ApplicationController
   before_action :authenticate_user_from_token!
 
   def index
-    if query_params[:filter] == 'upcoming'
-      if query_params[:kind] == 'connected'
-        connected_events = Event.upcoming_connected(@current_user).page(query_params[:page])
-        render json: connected_events, meta: { count: Event.upcoming_connected(@current_user).count }
-      elsif query_params[:kind] == 'created'
-        created_events = Event.upcoming_created(@current_user).page(query_params[:page])
-        render json: created_events, meta: { count: Event.upcoming_created(@current_user).count }
-      else
-        events = Event.upcoming.page(query_params[:page])
-        upcoming_events_count = Event.upcoming.count
-        render json: events, meta: { count:  upcoming_events_count }
-      end
-    elsif query_params[:filter] == 'past'
-      if query_params[:kind] == 'connected'
-        connected_events = Event.past_connected(@current_user).page(query_params[:page])
-        render json: connected_events, meta: { count: Event.past_connected(@current_user).count }
-      elsif query_params[:kind] == 'created'
-        created_events = Event.past_created(@current_user).page(query_params[:page])
-        render json: created_events, meta: { count: Event.past_created(@current_user).count }
-      else
-        events = Event.past.page(query_params[:page])
-        past_events_count = Event.past.count
-        render json: events, meta: { count: past_events_count }
-      end
-    end
+    events = Event.filtered(filter: query_params[:filter], 
+                          kind: query_params[:kind], 
+                          user: @current_user).page(query_params[:page])
+    count = Event.filtered(filter: query_params[:filter], 
+                          kind: query_params[:kind], 
+                          user: @current_user).count
+    render json: events, meta: { count: count }
   end
 
   def create
