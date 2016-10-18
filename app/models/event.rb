@@ -1,4 +1,5 @@
 class Event < ActiveRecord::Base
+  # Scopes
   scope :upcoming, -> { where('date >= ?', Time.now)
                         .includes(:groups, :creator)
                         .reorder(date: :asc) }
@@ -12,10 +13,13 @@ class Event < ActiveRecord::Base
   scope :created, -> (user) {
     where(user_id: user.id)
   }
-
+  
+  # Associations
   belongs_to :creator, class_name: "User", foreign_key: "user_id"
   has_many :groups, through: :group_events
   has_many :group_events
   accepts_nested_attributes_for :groups
+
+  # Pagination
   self.per_page = 5
 end

@@ -23,6 +23,9 @@ Rails.application.routes.draw do
       resources :lessons, only: [:index]
       resources :events, only: [:index, :create]
       resources :conversations, only: [:index, :create, :update]
+      scope module: 'receivers' do
+        resources :receivers_teachers, :receivers_students, :receivers_groups, :receivers_lessons, only: [:index]
+      end
     end
   end
 end
