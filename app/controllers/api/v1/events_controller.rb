@@ -2,13 +2,11 @@ class Api::V1::EventsController < ApplicationController
   before_action :authenticate_user_from_token!
 
   def index
-    events = Event.filtered(filter: query_params[:filter], 
-                          kind: query_params[:kind], 
-                          user: @current_user).page(query_params[:page])
-    count = Event.filtered(filter: query_params[:filter], 
-                          kind: query_params[:kind], 
-                          user: @current_user).count
-    render json: events, meta: { count: count }
+    events_query = Event::EventQuery.new(filter: query_params[:filter],
+                                         kind: query_params[:kind],
+                                         user: @current_user)
+    render json: events_query.result_query.page(query_params[:page]), 
+                 meta: { count: events_query.count }, status: :ok
   end
 
   def create
