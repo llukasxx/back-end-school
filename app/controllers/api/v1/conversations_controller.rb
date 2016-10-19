@@ -49,7 +49,9 @@ class Api::V1::ConversationsController < ApplicationController
 
     def conversation_params
       params.require(:conversation).permit(:body, :sender_id, :user_id, 
-                                           :subject, receivers: [:groups => [], :lessons => [], :users => []])
+                                           :subject, receivers: [:groups => [], 
+                                                                 :lessons => [], 
+                                                                 :users => []])
     end
 
     def create_params
