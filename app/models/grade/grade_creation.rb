@@ -24,7 +24,9 @@ class Grade
     end
 
     def errors
-      grades.errors
+      grades.map do |g|
+        g.errors
+      end
     end
 
     private

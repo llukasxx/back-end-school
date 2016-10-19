@@ -1,7 +1,4 @@
 Rails.application.routes.draw do
-  get 'events/index'
-
-  root 'home#index'
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   devise_for :users
   namespace :api, defaults: {format: :json} do
@@ -24,7 +21,8 @@ Rails.application.routes.draw do
       resources :events, only: [:index, :create]
       resources :conversations, only: [:index, :create, :update]
       scope module: 'receivers' do
-        resources :receivers_teachers, :receivers_students, :receivers_groups, :receivers_lessons, only: [:index]
+        resources :receivers_teachers, :receivers_students, 
+                  :receivers_groups, :receivers_lessons, only: [:index]
       end
     end
   end
