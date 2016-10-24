@@ -6,8 +6,12 @@ class Event < ActiveRecord::Base
   scope :past, -> { where('date < ?', Time.now)
                     .includes(:groups, :creator) }
 
-  scope :connected, -> (user) {  
-    user_groups_ids = user.groups_teacher.pluck(:id).uniq
+  scope :connected, -> (user) {
+    if(user.teacher?)
+      user_groups_ids = user.groups_teacher.pluck(:id).uniq
+    else
+      user_groups_ids = user.group_students.pluck(:id).uniq
+    end
     joins(:groups).where('groups.id': user_groups_ids).uniq
   }
   scope :created, -> (user) {

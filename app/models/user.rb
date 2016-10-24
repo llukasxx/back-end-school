@@ -52,5 +52,9 @@ class User < ActiveRecord::Base
     account_type == 'admin'
   end
 
+  def teacher?
+    account_type == 'teacher'
+  end
+
   self.per_page = 10
 end
