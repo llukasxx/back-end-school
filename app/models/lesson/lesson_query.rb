@@ -19,7 +19,7 @@ class Lesson
       def filtered
         if(student_id.present?)
           student = User.find(student_id)
-          student.student_lessons.includes(:lesson_dates)
+          student.student_lessons.includes(:lesson_dates, :students, :teachers)
         elsif(search_query.present?)
           Lesson.with_groups.search_by_name(search_query)
         else
