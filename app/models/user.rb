@@ -9,6 +9,9 @@ class User < ActiveRecord::Base
             length: {in: 2..30}
   validates :account_type, presence: true, 
             format: {with: /admin|teacher|student/}
+  validates :email, presence: true
+  validates :password, presence: true
+  validates :password_confirmation, presence: true
 
   # teacher-scopes
   scope :teachers, -> { where(account_type: 'teacher') }

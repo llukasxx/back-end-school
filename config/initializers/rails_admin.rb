@@ -22,6 +22,15 @@ RailsAdmin.config do |config|
   # config.audit_with :paper_trail, 'User', 'PaperTrail::Version' # PaperTrail >= 3.0.0
 
   ### More at https://github.com/sferik/rails_admin/wiki/Base-configuration
+  config.model 'User' do
+    edit do
+      exclude_fields :reset_password_sent_at, :remember_created_at, :sign_in_count,
+                     :current_sign_in_at, :last_sign_in_at, :current_sign_in_ip,
+                     :last_sign_in_ip, :events, :student_grades, :teacher_groups,
+                     :groups_teacher, :teacher_lessons, :group_students, :student_lessons,
+                     :teacher_grades, :messages, :receipts
+    end
+  end
 
   config.actions do
     dashboard                     # mandatory

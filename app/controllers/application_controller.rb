@@ -16,7 +16,7 @@ class ApplicationController < ActionController::Base
     def jwt_token(user) 
       JsonWebToken.encode('user' => user.email)
     end
- 
+
     def claims
       auth_header = request.headers['Authorization'] and
       token = auth_header.split(' ').last and

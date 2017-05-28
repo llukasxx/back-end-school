@@ -8,7 +8,10 @@ class Api::V1::SessionsController < Devise::SessionsController
     if user && user.valid_password?(params[:user][:password])
       auth_token = jwt_token(user)
       respond_with do |format|
-        format.json { render json: {auth_token: auth_token, user: user.name, accountType: user.account_type, userId: user.id} }
+        format.json { render json: { auth_token: auth_token, 
+                                     user: user.name, 
+                                     accountType: user.account_type, 
+                                     userId: user.id } }
       end
     else
       invalid_login_attempt
